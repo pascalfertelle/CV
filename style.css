@@ -1,0 +1,302 @@
+.liste
+{
+	font-style:italic;
+}
+section, header, form, div
+{ 
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-left:0px;
+	padding-bottom:30px;
+	margin-top:0px;
+}
+
+#haut_de_page
+{
+	font-size: 2em;
+}
+
+.lien:hover
+
+{
+   text-decoration: underline;
+   color: red;
+}
+
+.élément:hover
+{
+	border-width: 4px;
+	border-color: blue;
+	border-style: outset;
+	border-radius:10px;
+	box-shadow:6px 6px 6px blue;
+	margin-left:0px;
+	padding-left:30px;
+	padding-bottom:30px;
+	margin-top:0px;
+}
+
+h2
+{
+	margin-top:0px;
+	padding-top:20px;
+	text-align: center;
+	
+	
+}
+
+
+.en_tete:hover
+{ 
+	margin-left: 0px;
+}
+ul
+{
+	font-size: 1em;
+}
+
+strong
+{
+	font-weight: bold;
+}
+
+.neutre
+{background-color: #aeb6bf;
+}
+
+.Monsieur
+{background-color: #36abb1;
+}
+
+.Madame
+{background-color: #eb8de9;
+}
+
+body
+{
+	font-family: arial, serif;
+	background-image: url("bleu.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-width: 4px;
+	border-color: blue;
+	border-style: outset;
+	border-radius:10px;
+	box-shadow:6px 6px 6px blue;
+	margin-left: 30px;
+	margin-right:30px;
+	}
+	
+	
+h1 img
+{
+	float: right;
+
+	margin-right: 50px
+}
+	
+h2 strong
+{
+	background-color: rgb(35,28,176);
+	box-shadow:6px 6px 6px blue;
+}
+
+
+h3
+	{
+	text-decoration: underline;
+	background-color: RGBa(35,28,176,0.5);
+	text-shadow: 2px 2px 4px black;
+	}
+
+@font-face
+	{
+    font-family: 'major_snafuregular';
+    src: url('font/major_shift-webfont.eot');
+    src: url('font/major_shift-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/major_shift-webfont.woff2') format('woff2'),
+         url('font/major_shift-webfont.woff') format('woff'),
+         url('font/major_shift-webfont.ttf') format('truetype'),
+         url('font/major_shift-webfont.svg#major_snafuregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face
+{
+    font-family: 'lintsecregular';
+    src: url('font/Lintsec-webfont.eot');
+    src: url('font/Lintsec-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/Lintsec-webfont.woff2') format('woff2'),
+         url('font/Lintsec-webfont.woff') format('woff'),
+         url('font/Lintsec-webfont.ttf') format('truetype'),
+         url('font/Lintsec-webfont.svg#lintsecregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h3:hover
+{ 
+	font-family: major_snafuregular;
+	text-shadow: none;
+}
+
+.militaire
+{ 
+	font-family: lintsecregular ;
+}
+
+.photo_identite
+{
+	width: 120px;
+	height: 120px;
+	box-shadow: 4px 4px 6px black;
+	
+}
+
+.photo_identite:hover
+
+{
+	border-color: blue;
+	border-style: outset;
+	border-radius:10px;
+}
+
+li
+{
+padding-right:0px;
+}
+
+li:hover, tr:hover , fieldset, table, .TAEG, #titre
+{
+	text-shadow: 2px 2px 4px black;
+	border-color: blue;
+	border-style: outset;
+	border-radius:10px;
+	box-shadow:6px 6px 6px blue;
+}
+
+.flexbox
+{
+
+    display: flex;
+	flex-direction:column;
+	justify-content:center;
+	flex-wrap:nowrap;
+	padding-top:30px;
+	
+
+}
+
+.flexbox2
+{
+
+    display: flex;
+	flex-direction:row;
+	justify-content: center;
+	flex-wrap:nowrap;
+	
+
+}
+
+.flexbox3
+{
+	display:flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.flexbox4
+{
+	display:flex;
+	flex-direction:column-reverse;
+}
+
+
+.flexbox5
+{
+
+    display: flex;
+	flex-direction:row;
+	justify-content: space-between;
+	margin-top: 30px;
+	
+
+}
+
+#scrollbar
+{
+	overflow-y: scroll;
+	height: 400px
+}
+
+table
+
+{
+
+    border-collapse: collapse; /* Les bordures du tableau seront collées (plus joli) */
+    font-size: 1em;
+    float: left;
+
+}
+
+.autre ,th,table,td
+
+{
+
+    border: 1px solid black;
+
+}
+
+td
+
+{
+	padding-left-left:5px;
+	padding-right: 5px;
+ }
+
+caption
+
+{
+	caption-side: top;
+}
+
+.green
+
+{
+	background-color: green;
+	font-style: italic;
+}
+
+.red
+
+{
+	background-color: red;
+	font-weight: bold;
+}
+
+.échéance
+
+{
+	border-width: 3px;
+	border-style: outset;
+	border-color: blue;
+}
+
+.TAEG
+
+{
+	text-align: center;
+}
+
+#titre
+
+{
+	text-align: center;
+	width :60%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 30px
+	margin-bottom:30px;
+}
