@@ -39,39 +39,6 @@
 			$date = $_POST["date"];
 			$today= new DateTime();
 			$date1= new DateTime ($_POST["date"]);
-			/*
-			function CalculTaux ($me,$as,$fdo){
-
-			while ($calcul>0.00001) 
-				{
-					$calcul=0;
-					$taux = $taux - 0.0000001;
-					while ($n<=$durée)
-					{
-						$calcul=$calcul + ($m/(1+$taux)**$n);
-						$n=$n+1;
-					}
-					$calcul=$K-$fd-$calcul;
-					$n=1;
-				}
-
-
-			while ($calcul<-0.00001) 
-				{
-					$calcul=0;
-					$taux = $taux + 0.00000001;
-					while ($n<=$durée)
-					{
-						$calcul=$calcul + (($m)/(1+$taux)**$n);
-						$n=$n+1;
-					}
-					$calcul=$K-$fd-$calcul;
-					$n=1;
-				}
-
-			$taux1=CalculTaux ($m,0,0)
-			}
-			*/
 
 			while ($calcul>0.00001) 
 				{
