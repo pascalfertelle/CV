@@ -43,7 +43,7 @@ $sexe = 'neutre';
 			<input type = "submit" value = "Envoyer">
 		</form>
 		<div class="élément">
-		<h1> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]; }?><?php if (isset($_POST["nom"])) 
+		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]; }?><?php if (isset($_POST["nom"])) 
 		{ echo $_POST["nom"];}?><br /> conçu par apprentissage avec <a href="https://openclassrooms.com/"
 		target="_blank" title="CLiquez ici pour découvrir OpenClassrooms"><em>OpenClassrooms </a></br></h1>
 		<?php 
@@ -70,7 +70,7 @@ $sexe = 'neutre';
 		</div>
 	</div>
 	<section class="élément">
-		<h1 id="haut_de_page"><strong>FERTELLE PASCAL </strong> <a href="image/photo.jpg" target="_blank"><img class="photo_identite" src=
+		<h1><strong>FERTELLE PASCAL </strong> <a href="image/photo.jpg" target="_blank"><img class="photo_identite" src=
 		"image/photo_mini.jpg" alt="Pascal Fertelle" title="PASCAL FERTELLE" /></a></h1>
 		<span class="en_tete">6 rue de la Ferme Flahaut 62113 Labourse</span></br>                                 
 		<span class="en_tete">Tel :0633260628</span></br>
