@@ -1,5 +1,4 @@
 <?php setcookie('ip', $_SERVER['REMOTE_ADDR'], time()+24*3600);?>
-<!-- This product includes GeoLite data created by MaxMind, available from http://www.maxmind.com/.-->
 <!DOCTYPE html>
 <html>
 <head>
