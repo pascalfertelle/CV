@@ -18,7 +18,9 @@ $sexe = 'neutre';
 <body class="<?php echo $sexe;?>" class="flexbox">
 	<div class="flexbox5">
 		<form method = "post" class="élément">
-			<p>Présentez vous s'il vous plait<p />
+			<fieldset class="flexbox3">
+			<legend> Vos coordonnées</legend>
+			<p>Présentez vous s'il vous plait :</p>
 			<p>Madame<input type= "radio" name="sexe" 
 			<?php 
 			if (isset($_POST["sexe"])) 
@@ -40,7 +42,9 @@ $sexe = 'neutre';
 			}
 			?>value="Monsieur"></p>
 			<p>Votre nom : <input type = "text" name = "nom"> </p>
-			<input type = "submit" value = "Envoyer">
+			<p>Votre adresse mail : <input type = "email" name = "user_mail"></p>
+			<input type = "submit" value = "Envoyer le formulaire!">
+			</fieldset>
 		</form>
 		<div class="élément">
 		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]; }?><?php if (isset($_POST["nom"])) 

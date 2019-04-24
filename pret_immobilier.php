@@ -21,6 +21,7 @@
 			<input type = "submit" value = "Envoyer">
 		</fieldset>
 		</form>
+		<a href="index.php">Revenir au CV </a>
 	</div>
 
 		<?php

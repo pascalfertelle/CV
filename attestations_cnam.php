@@ -31,5 +31,6 @@
    	   NFT001 : Informatique appliquée</br></p>
 
 </ul>
+<a href="index.php">Revenir au CV</a>
 </body>
 </html>
