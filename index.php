@@ -22,7 +22,7 @@ $sexe = 'neutre';
 			<legend> Vos coordonnées</legend>
 			<p>Présentez vous s'il vous plait :</p>
 			<p>Madame<input type= "radio" name="sexe" 
-			<?php 
+			value="Madame" <?php 
 			if (isset($_POST["sexe"])) 
 			{ 
 			  if ($_POST["sexe"] == "Madame") 
@@ -30,9 +30,9 @@ $sexe = 'neutre';
 				  echo "checked";
 			  }
 			}
-			?>value="Madame">
+			?>>
 			Monsieur<input type= "radio" name="sexe"
-			<?php 
+			value="Monsieur" <?php 
 			if (isset($_POST["sexe"])) 
 			{ 
 			  if ($_POST["sexe"] == "Monsieur") 
@@ -40,16 +40,24 @@ $sexe = 'neutre';
 				  echo "checked";
 			  }
 			}
-			?>value="Monsieur"></p>
+			?>></p>
 			<p>Votre nom : <input type = "text" name = "nom"> </p>
 			<p>Votre adresse mail : <input type = "email" name = "user_mail"></p>
 			<input type = "submit" value = "Envoyer le formulaire!">
 			</fieldset>
+			<p><?php if (!empty($_POST["user_mail"])) {
+			mail($_POST["user_mail"], "sujet", "test test test");
+			echo "mail de bienvenue";
+			}
+			else {
+    		echo "pas de mail";
+			}?></p>
 		</form>
 		<div class="élément">
-		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]; }?><?php if (isset($_POST["nom"])) 
+		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]." "; }?><?php if (isset($_POST["nom"])) 
 		{ echo $_POST["nom"];}?><br /> conçu par apprentissage avec <a href="https://openclassrooms.com/"
-		target="_blank" title="CLiquez ici pour découvrir OpenClassrooms"><em>OpenClassrooms </a></br></h1>
+		target="_blank" title="CLiquez ici pour découvrir OpenClassrooms"><em>OpenClassrooms </a></br>
+		</h1>
 		<?php 
 		$monfichier = fopen('compteur.txt', 'r+');
 		$monfichier2 = fopen('adresse_ip.txt' , 'a');
