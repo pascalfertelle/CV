@@ -300,3 +300,11 @@ caption
 	margin-top: 30px
 	margin-bottom:30px;
 }
+
+.mail
+
+{
+	text-align: center;
+	color: green;
+	font-weight: bold;
+}

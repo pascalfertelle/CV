@@ -45,13 +45,11 @@ $sexe = 'neutre';
 			<p>Votre adresse mail : <input type = "email" name = "user_mail"></p>
 			<input type = "submit" value = "Envoyer le formulaire!">
 			</fieldset>
-			<p><?php if (!empty($_POST["user_mail"])) {
-			mail($_POST["user_mail"], "sujet", "test test test");
-			echo "mail de bienvenue";
+			<p class= "mail"><?php if (!empty($_POST["user_mail"])) {
+			mail($_POST["user_mail"], "Bienvenue", "Bonjour","From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>");
+			echo "Merci de votre confiance, vous allez recevoir un mail de bienvenue";
 			}
-			else {
-    		echo "pas de mail";
-			}?></p>
+			?></p>
 		</form>
 		<div class="élément">
 		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]." "; }?><?php if (isset($_POST["nom"])) 
