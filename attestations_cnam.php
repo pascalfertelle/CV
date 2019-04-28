@@ -8,11 +8,11 @@
 <body class="<?php echo $_GET['sexe'];?>">
 <h1><strong>Attestations modules CNAM <img src="image/cnam_logo.jpg" alt="cnam" title="Conservatoire National des arts et métiers"/></strong></h1>
 <ul>
-	<li><a href="pdf/Attestation_EAR110.pdf">module EAR110 Union européeene origines et fonctionnement</a></li>
-	<li><a href="pdf/Attestation_GFN012.pdf">module GFN012 Finance de marché:les instruments financiers et la gestion de portefeuille</a></li>
-	<li><a href="pdf/Attestation_GFN013.pdf">module GFN01 Finance de marché: organisations et acteurs des marchés financiers</a></li>
-	<li><a href="pdf/Attestation_EAR006.pdf">module EAR006 Mathématiques pour la décision II</a></li>
-	<li><a href="pdf/cursus_cnam.pdf">Cursus CNAM :</a></li>
+	<li><a href="pdf/Attestation_EAR110.pdf" target="_blank" title="Télécharger">module EAR110 Union européeene origines et fonctionnement</a></li>
+	<li><a href="pdf/Attestation_GFN012.pdf" target="_blank" title="Télécharger">module GFN012 Finance de marché:les instruments financiers et la gestion de portefeuille</a></li>
+	<li><a href="pdf/Attestation_GFN013.pdf" target="_blank" title="Télécharger">module GFN01 Finance de marché: organisations et acteurs des marchés financiers</a></li>
+	<li><a href="pdf/Attestation_EAR006.pdf" target="_blank" title="Télécharger">module EAR006 Mathématiques pour la décision II</a></li>
+	<li><a href="pdf/cursus_cnam.pdf" target="_blank" title="Télécharger">Cursus CNAM :</a></li>
 	<p>EAR001 : Economie Générale : microéconomie</br>
 	   EAR002 : Économie Générale : macroéconomie</br>
 	   EAR003 : Statistique descriptive</br>
