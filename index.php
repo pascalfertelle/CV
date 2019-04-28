@@ -46,8 +46,11 @@ $sexe = 'neutre';
 			<input type = "submit" value = "Envoyer le formulaire!">
 			</fieldset>
 			<p class= "mail"><?php if (!empty($_POST["user_mail"])) {
-			mail($_POST["user_mail"], "Bienvenue", "Bonjour","From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>");
-			echo "Merci de votre confiance, vous allez recevoir un mail de bienvenue";
+			$Bienvenue="Bienvenue ";
+			$Bonjour="Bonjour";
+			$confiance="Merci de votre confiance, vous allez recevoir un mail de bienvenue";
+			mail($_POST["user_mail"], $Bienvenue, $Bonjour,"From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>");
+			echo $confiance;
 			}
 			?></p>
 		</form>
@@ -144,14 +147,15 @@ $sexe = 'neutre';
 		<section class="élément">
 			<h3>Formations</h3>
 			<ul>
+				<li>17 Janvier 2018 : <a href="pdf/CACES_3.pdf" target="_blank" title="Télécharger">CACES 3 R389</a></li>
 				<li>2011 - 2014 : cours d'analyse économique et financière au CNAM Ile-de-France en cours du soir et en formation à distance </br>
 				Cliquer<a href="attestations_cnam.php?sexe=<?php echo $sexe;?>"><em> ici </em></a>pour télécharger mes attestations du CNAM.<img src="image/cnam_logo.jpg" alt="cnam" 
 				title="Conservatoire National des arts et métiers"/></li>
-				<li>2004 : Diplôme Universitaire en télécommunications spatiales et mobiles (université-Toulon-Var)</li>
-				<li>2002 : Titre RNCP Niveau III Technicien supérieur de maintenance et d’exploitation en télécommunication, option câble, option réseau 
+				<li>2004 : <a href="pdf/DU_TELECOM_ET_SPATIALES.pdf" target="_blank" title="Télécharger">Diplôme Universitaire en télécommunications spatiales et mobiles</a> (université-Toulon-Var)</li>
+				<li>2002 : <a href="pdf/Diplome_TITRE3.pdf" target="_blank" title="Télécharger">Titre RNCP Niveau III</a> Technicien supérieur de maintenance et d’exploitation en télécommunication, option câble, option réseau 
 				hertzien</li>
-				<li>1997 : Titre RNCP Niveau IV Technicien d’équipement de télécommunications hertziennes</li>
-				<li>1995 : Baccalauréat scientifique option mathématiques</li>
+				<li>1997 : <a href="pdf/Diplome_TITRE4.pdf" target="_blank" title="Télécharger">Titre RNCP Niveau IV</a> Technicien d’équipement de télécommunications hertziennes</li>
+				<li>1995 : <a href="pdf/B_A_C.pdf" target="_blank" title="Télécharger">Baccalauréat</a> scientifique option mathématiques</li>
 			</ul>
 			<a href="#haut_de_page">Revenir en haut de page</a>
 		</section class="élément">
