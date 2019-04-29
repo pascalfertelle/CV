@@ -47,6 +47,8 @@ $sexe = 'neutre';
 			</fieldset>
 			<p class= "mail"><?php if (!empty($_POST["user_mail"])) {
 			$Bienvenue="Bienvenue ";
+			if (!empty($_POST["sexe"])) {$Bienvenue=$Bienvenue . $_POST["sexe"]." ";}
+			if (!empty($_POST["nom"])) {$Bienvenue=$Bienvenue . $_POST["nom"];}
 			$Bonjour="Bonjour";
 			$confiance="Merci de votre confiance, vous allez recevoir un mail de bienvenue";
 			mail($_POST["user_mail"], $Bienvenue, $Bonjour,"From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>");
