@@ -49,7 +49,9 @@ $sexe = 'neutre';
 			$Bienvenue="Bienvenue ";
 			if (!empty($_POST["sexe"])) {$Bienvenue=$Bienvenue . $_POST["sexe"]." ";}
 			if (!empty($_POST["nom"])) {$Bienvenue=$Bienvenue . $_POST["nom"];}
-			$Bonjour="Bonjour";
+			$Bonjour="Bonjour ";
+			if (!empty($_POST["sexe"])) {$Bonjour=$Bonjour . $_POST["sexe"]." ";}
+			if (!empty($_POST["nom"])) {$Bonjour=$Bonjour . $_POST["nom"];}
 			$confiance="Merci de votre confiance, vous allez recevoir un mail de bienvenue";
 			mail($_POST["user_mail"], $Bienvenue, $Bonjour,"From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>");
 			echo $confiance;
@@ -66,8 +68,8 @@ $sexe = 'neutre';
 		$monfichier2 = fopen('adresse_ip.txt' , 'a');
 		$date= date('l j F Y, H:i');
 		$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
-		if (!isset ($_COOKIE['ip']))
-		{
+		if (isset ($_COOKIE['ip']))
+		{intval($pages_vues);
 		$pages_vues += 1; // On augmente de 1 ce nombre de pages vues
 		fseek($monfichier, 0); // On remet le curseur au début du fichier
 		fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
