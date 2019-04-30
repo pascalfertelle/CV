@@ -69,7 +69,7 @@ $sexe = 'neutre';
 		$date= date('l j F Y, H:i');
 		$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
 		if (isset ($_COOKIE['ip']))
-		{intval($pages_vues);
+		{
 		$pages_vues += 1; // On augmente de 1 ce nombre de pages vues
 		fseek($monfichier, 0); // On remet le curseur au début du fichier
 		fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
