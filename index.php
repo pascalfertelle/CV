@@ -45,7 +45,8 @@ $sexe = 'neutre';
 			<p>Votre adresse mail : <input type = "email" name = "user_mail"></p>
 			<input type = "submit" value = "Envoyer le formulaire!">
 			</fieldset>
-			<p class= "mail"><?php if (!empty($_POST["user_mail"])) {
+			<p class= "mail"><?php if (!empty($_POST["user_mail"]))
+			{
 			$Bienvenue="Bienvenue ";
 			if (!empty($_POST["sexe"])) {$Bienvenue=$Bienvenue . $_POST["sexe"]." ";}
 			if (!empty($_POST["nom"])) {$Bienvenue=$Bienvenue . $_POST["nom"];}
@@ -66,6 +67,7 @@ $sexe = 'neutre';
 		<?php 
 		$monfichier = fopen('compteur.txt', 'r+');
 		$monfichier2 = fopen('adresse_ip.txt' , 'a');
+		$monfichier3 = fopen('formulaire.txt','a');
 		$date= date('l j F Y, H:i');
 		$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
 		if (isset ($_COOKIE['ip']))
@@ -82,6 +84,41 @@ $sexe = 'neutre';
         fwrite($monfichier2, ' ');
         fwrite($monfichier2, "\r\n");
         fclose($monfichier2);
+        if (!empty($_POST["nom"]) || !empty($_POST["user_mail"]))
+        {
+        $contact = "Nouveau contact ";
+        fwrite($monfichier3, $_SERVER['REMOTE_ADDR']);
+		fwrite($monfichier3, ' ');
+        	if (!empty($_POST["sexe"]))
+        	{
+        	fwrite($monfichier3, $_POST['sexe']);
+        	fwrite($monfichier3, ' ');
+        	$contact = $contact . $_POST["sexe"] . " ";
+        	}
+        	if (!empty($_POST["nom"]))
+        	{
+        	fwrite($monfichier3, $_POST['nom']);
+        	fwrite($monfichier3, ' ');
+        		if (!empty($_POST["sexe"]))
+        		{
+        		$contact = $contact . $_POST["nom"] . " ";
+        		}
+        		else
+        		{
+        		$contact = $_POST["nom"] . " ";
+        		}
+        	}
+        	if (!empty($POST["user_mail"]))
+        	{
+        	fwrite($monfichier3, $_POST["user_mail"]);
+        	fwrite($monfichier3, ' ');
+        	$contact = $contact . $_POST["user_mail"];
+        	}
+        fwrite($monfichier3, $date);
+        fwrite($monfichier3, "\r\n");
+        fclose($monfichier3);
+        mail("p.fertelle@hotmail.fr","nouveau contact CV en ligne" , $contact ,"From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>" );
+        }
 		echo '<h2>Cette page a été vue ' . $pages_vues . ' fois !<h2>';
 		?>
 		Cliquer<a href="pret_immobilier.php?sexe=<?php echo $sexe;?>"><em> ici </em></a>pour votre simulation de prêt immobilier.
