@@ -68,7 +68,7 @@ $sexe = 'neutre';
 		$monfichier = fopen('compteur.txt', 'r+');
 		$monfichier2 = fopen('adresse_ip.txt' , 'a');
 		$monfichier3 = fopen('formulaire.txt','a');
-		$date= date('l j F Y, H:i');
+		$date= date('Y-m-d G:i:s'); // fotmat y-m-d G:i:s adaptée à la base de données SQL
 		$pages_vues = fgets($monfichier); // On lit la première ligne (nombre de pages vues)
 		if (isset ($_COOKIE['ip']))
 		{
@@ -78,27 +78,20 @@ $sexe = 'neutre';
 		fputs($monfichier, $pages_vues); // On écrit le nouveau nombre de pages vues
 		fclose($monfichier);
 		}
-		fwrite($monfichier2, $_SERVER['REMOTE_ADDR']);
-		fwrite($monfichier2, ' ');
-        fwrite($monfichier2, $date);
-        fwrite($monfichier2, ' ');
-        fwrite($monfichier2, "\r\n");
+		fwrite($monfichier2, $_SERVER['REMOTE_ADDR'].' '.$date."\r\n");
         fclose($monfichier2);
         if (!empty($_POST["nom"]) || !empty($_POST["user_mail"]))
         {
         $contact = "Nouveau contact ";
-        fwrite($monfichier3, $_SERVER['REMOTE_ADDR']);
-		fwrite($monfichier3, ' ');
+        fwrite($monfichier3, $_SERVER['REMOTE_ADDR'].' ');
         	if (!empty($_POST["sexe"]))
         	{
-        	fwrite($monfichier3, $_POST['sexe']);
-        	fwrite($monfichier3, ' ');
+        	fwrite($monfichier3, $_POST['sexe']." ");
         	$contact = $contact . $_POST["sexe"] . " ";
         	}
         	if (!empty($_POST["nom"]))
         	{
-        	fwrite($monfichier3, $_POST['nom']);
-        	fwrite($monfichier3, ' ');
+        	fwrite($monfichier3, $_POST['nom']." ");
         		if (!empty($_POST["sexe"]))
         		{
         		$contact = $contact . $_POST["nom"] . " ";
@@ -108,15 +101,28 @@ $sexe = 'neutre';
         		$contact = $_POST["nom"] . " ";
         		}
         	}
-        	if (!empty($POST["user_mail"]))
+        	if (!empty($_POST['user_mail']))
         	{
-        	fwrite($monfichier3, $_POST["user_mail"]);
-        	fwrite($monfichier3, ' ');
-        	$contact = $contact . $_POST["user_mail"];
+        	fwrite($monfichier3, $_POST['user_mail']." ");
+        	$contact = $contact . $_POST['user_mail'];
         	}
-        fwrite($monfichier3, $date);
-        fwrite($monfichier3, "\r\n");
+        fwrite($monfichier3, $date."\r\n");
+        //Lorsqu'on passait à la ligne, il y avait en fait deux actions : renvoyer le chariot au début de la ligne (tout à gauche), et faire avancer le papier pour bien écrire sur la ligne suivante.
         fclose($monfichier3);
+
+        try
+        {
+	    $bdd = new PDO('mysql:host=localhost;dbname=cv;charset=utf8', 'root', ''); //On construit une instance de la classe PDO.
+        }
+        catch (Exception $e)
+        {
+        die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('INSERT INTO formulaire(nom, sexe, adresse_mail, adresse_ip, date) VALUES(:nom, :sexe, :adresse_mail, 
+        :adresse_ip, :date)');
+ 		$req->execute(array('nom' => $_POST['nom'], 'sexe' => $_POST['sexe'], 'adresse_mail' => $_POST['user_mail'], 'adresse_ip' => $_SERVER['REMOTE_ADDR'], 'date' => $date));
+		$req->closeCursor();
+
         mail("p.fertelle@hotmail.fr","nouveau contact CV en ligne" , $contact ,"From:PASCAL FERTELLE <pascal.fertelle@bbox.fr>" );
         }
 		echo '<h2>Cette page a été vue ' . $pages_vues . ' fois !<h2>';
