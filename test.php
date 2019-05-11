@@ -37,7 +37,7 @@ echo "checked";
 <?php
 try
 {
-	$bdd = new PDO('mysql:host=localhost;dbname=cv;charset=utf8', 'root', ''); //On construit une instance de la classe PDO.
+	$bdd = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f'); //On construit une instance de la classe PDO.
 }
 catch (Exception $e)
 {
