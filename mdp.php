@@ -6,7 +6,7 @@
 </head>
 <body>
 	<form method = "post" action = "secret.php">
-		<legend> Votre mot de passe</legend>
+		<legend> Votre mot de passe pour perçer mon secret !</legend>
 		<p>password : <input type = "password" name = "password"> </p>
 		<input type = "submit" value = "Envoyer le mot de passe">
 		<?php
@@ -19,10 +19,13 @@
 		$incrementation = 0;
 		}
 		?>
-		<input type = "hidden" name= "tentative" values="<?php echo $incrementation; ?>">
+		<input type = "hidden" name= "tentative" value="<?php echo $incrementation ; ?>">
 	</form>
 <?php
-echo $incrementation ."totohhh";
+if ($incrementation>0)
+{
+echo $incrementation ." tentative";
+}
 ?>
 </body>
 </html>
