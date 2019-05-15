@@ -1,11 +1,17 @@
 <?php
-	if ($_POST["password"] = "kangourou")
+	if (isset($_POST["incrementation"]))
 	{
-		echo "Mon secret est : Brian is in the kitchen!";
-		echo $_POST["password"];
+	$incre=$_POST["incrementation"]+1;
+	}
+	if ($_POST["password"] == "kangourou")
+	{
+
+		echo "Mon secret est : Brian is in the kitchen! Vous avez perçé mon secret" ;
+		echo $_POST["incrementation"];
+
 	}
 	else
 	{ 
-		header("location: mdp.php");
+		header("location: mdp.php?inc=$incre");
 	}
 ?>
