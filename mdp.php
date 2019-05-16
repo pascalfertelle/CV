@@ -25,6 +25,14 @@
 if ($incrementation>0)
 {
 echo $incrementation ." tentative";
+	if ($incrementation>1)
+	{
+		echo "s sans succès!";
+	}
+	else
+	{
+		echo " sans succès!";
+	}
 }
 ?>
 </body>
