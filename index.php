@@ -17,7 +17,7 @@ $sexe = 'neutre';
 ?>
 <body class="<?php echo $sexe;?>" class="flexbox">
 	<div class="flexbox5">
-		<form method = "post" class="élément">
+		<form method = "post" class="élément" action="index.php">
 			<fieldset class="flexbox3">
 			<legend> Vos coordonnées</legend>
 			<p>Présentez vous s'il vous plait :</p>
