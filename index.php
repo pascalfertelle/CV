@@ -61,7 +61,7 @@ $sexe = 'neutre';
 		</form>
 		<div class="élément">
 		<h1 id="haut_de_page"> Bienvenue sur mon <strong>cv</strong> <?php if (isset($_POST["sexe"])) { echo $_POST["sexe"]." "; }?><?php if (isset($_POST["nom"])) 
-		{ echo $_POST["nom"];}?><br /> conçu par apprentissage avec <a href="https://openclassrooms.com/"
+		{ echo htmlspecialchars($_POST["nom"]);}?><br /> conçu par apprentissage avec <a href="https://openclassrooms.com/"
 		target="_blank" title="CLiquez ici pour découvrir OpenClassrooms"><em>OpenClassrooms </a></br>
 		</h1>
 		<?php 
