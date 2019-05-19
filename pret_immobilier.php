@@ -125,11 +125,12 @@
 			echo '<th>Montant total à rembourser</th></tr>';
 			while ($n<=$durée) 
 			{
+
 				$intêrets=$K*$taux1;
 				$intêrets=round($intêrets,2);
 				$Kremboursé=$m-$intêrets;
 				$K=$K-$Kremboursé;
-				$date=date('j-M-Y',strtotime('+1 month',strtotime($date)));
+				$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
 				echo '<tr';
 
 					if ($n<=$interval)
@@ -151,6 +152,20 @@
 					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$_POST["assurance"].'</td>';}
 					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.($m+$a).'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
+
+				try
+		        {
+			    $bdd = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f'); //On construit une instance de la classe PDO.
+		        }
+		        catch (Exception $e)
+		        {
+		        die('Erreur : ' . $e->getMessage());
+		    	}
+		    	$val=123;
+		    	$dat=date('Y-m-d');
+		        $req = $bdd->prepare('INSERT INTO pret_immobilier(intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES(:interets, :Krembourse, :K, :date_de_remboursement, :assurance_du_pret, :montant_total_a_rembourser)');
+	 			$req->execute(array('interets' => $val, 'Krembourse' => $val, 'K' => $val, 'date_de_remboursement' => $dat, 'assurance_du_pret'=> $val, 'montant_total_a_rembourser' => $val));
+				$req->closeCursor();
 					  
 					  
 				$n=$n+1;
