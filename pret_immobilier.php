@@ -27,6 +27,18 @@
 		<?php
 		if (isset ($_POST["date"]) && isset ($_POST["capital_emprunté"]) && isset ($_POST["frais_de_dossier"]) && isset ($_POST["durée"]) && isset ($_POST["mensualité"]) && isset ($_POST["assurance"]))
 		{   
+			try
+		    {
+			$bdd = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f'); //On construit une instance de la classe PDO.
+		    }
+		    catch (Exception $e)
+		    {
+		    die('Erreur : ' . $e->getMessage());
+		    }
+		    $req=$bdd->prepare('TRUNCATE TABLE pret_immobilier');
+	 		$req->execute(array());
+			$req->closeCursor();
+
 			echo '<div class="flexbox4">';
 			$K = $_POST["capital_emprunté"];
 			$fd=$_POST["frais_de_dossier"];
@@ -161,10 +173,8 @@
 		        {
 		        die('Erreur : ' . $e->getMessage());
 		    	}
-		    	$val=123;
-		    	$dat=date('Y-m-d');
 		        $req = $bdd->prepare('INSERT INTO pret_immobilier(intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES(:interets, :Krembourse, :K, :date_de_remboursement, :assurance_du_pret, :montant_total_a_rembourser)');
-	 			$req->execute(array('interets' => $val, 'Krembourse' => $val, 'K' => $val, 'date_de_remboursement' => $dat, 'assurance_du_pret'=> $val, 'montant_total_a_rembourser' => $val));
+	 			$req->execute(array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'assurance_du_pret'=> $_POST["assurance"], 'montant_total_a_rembourser' => ($m+$a)));
 				$req->closeCursor();
 					  
 					  
