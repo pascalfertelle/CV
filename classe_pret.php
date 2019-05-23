@@ -6,8 +6,6 @@ class Pret
   private $_assurance;
   private $_duree;
   private $_FraisDeDossier;
-  private $_n = 1;
-  private $_calcul = 10;
 
   public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 paramètres
   {
@@ -112,10 +110,16 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
 
   public function pret()
   {
-
-    while ($this->_calcul > 0.00001) 
+  	$calcul=10;
+  	$n=1;
+  	$taux=0.005;
+  	$m=$this->_mensualite;
+  	$durée=$this->_duree;
+  	$a=$this->_assurance;
+  	$fd=$this->_FraisDeDossier;
+    while ($calcul > 0.00001) 
         {
-          $this->_calcul=0;
+          $calcul=0;
           $taux = $taux - 0.0000001;
           while ($n<=$durée)
           {
