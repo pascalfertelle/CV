@@ -1,17 +1,39 @@
 <?php
 class Pret
 {
+  private $_K;
   private $_mensualite;
   private $_assurance;
   private $_duree;
   private $_FraisDeDossier;
+  private $_n = 1;
+  private $_calcul = 10;
 
-  public function __construct($mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 paramètres
+  public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 paramètres
   {
+    $this->setMensualite($K);// Initialisation du capital K.
     $this->setMensualite($mensualite); // Initialisation de la mensualité.
     $this->setAssurance($assurance); // Initialisation de l'assurance.
     $this->setDuree($duree); // Initialisation de la durée.
     $this->setFraisDedossier($assurance);//Initialisation des frais de dossier.
+  }
+
+  // Mutateur chargé de modifier l'attribut $_K.
+  public function setMensualite($K)
+  {
+    if (!is_int($K)) // S'il ne s'agit pas d'un nombre entier.
+    {
+      trigger_error('La montant d\'un prêt doit être un nombre entier', E_USER_WARNING);
+      return;
+    }
+
+if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+    {
+      trigger_error('La montant d\'un prêt ne peut être négative', E_USER_WARNING);
+      return;
+    }
+    
+    $this->_K = $K;
   }
 
   // Mutateur chargé de modifier l'attribut $_mensualite.
@@ -77,7 +99,8 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
       return;
     }
 
-if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+
+    if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('Ls frais de dossier d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
@@ -85,3 +108,74 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
 
     $this->_FraisDeDossier = $FraisDeDossier;
   }
+
+
+  public function pret()
+  {
+
+    while ($this->_calcul > 0.00001) 
+        {
+          $this->_calcul=0;
+          $taux = $taux - 0.0000001;
+          while ($n<=$durée)
+          {
+            $calcul=$calcul + ($m/(1+$taux)**$n);
+            $n=$n+1;
+          }
+          $calcul=$K-$calcul;
+          $n=1;
+        }
+
+
+      while ($calcul<-0.00001) 
+        {
+          $calcul=0;
+          $taux = $taux + 0.00000001;
+          while ($n<=$durée)
+          {
+            $calcul=$calcul + (($m)/(1+$taux)**$n);
+            $n=$n+1;
+          }
+          $calcul=$K-$calcul;
+          $n=1;
+        }
+      
+      $taux1=$taux;
+
+      $calcul=-1;
+
+      while ($calcul<-0.00001) 
+        {
+          $calcul=0;
+          $taux = $taux + 0.00000001;
+          while ($n<=$durée)
+          {
+            $calcul=$calcul + (($m)/(1+$taux)**$n);
+            $n=$n+1;
+          }
+          $calcul=$K-$fd-$calcul;
+          $n=1;
+        }
+
+      $taux2=$taux;
+
+      $calcul=-1;
+
+      while ($calcul<-0.00001) 
+        {
+          $calcul=0;
+          $taux = $taux + 0.00000001;
+          while ($n<=$durée)
+          {
+            $calcul=$calcul + (($m+$a)/(1+$taux)**$n);
+            $n=$n+1;
+          }
+          $calcul=$K-$fd-$calcul;
+          $n=1;
+        }
+
+      $taux3=$taux;
+
+  }
+
+}
