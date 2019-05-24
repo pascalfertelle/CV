@@ -17,7 +17,7 @@ class Pret
   }
 
   // Mutateur chargé de modifier l'attribut $_K.
-  public function setMensualite($K)
+  public function setK($K)
   {
     if (!is_int($K)) // S'il ne s'agit pas d'un nombre entier.
     {
@@ -43,7 +43,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
       return;
     }
 
-if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+if ($mensualite < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('La mensualité d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
@@ -108,7 +108,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
   }
 
 
-  public function pret()
+  public function taux()
   {
   	$calcul=10;
   	$n=1;
@@ -144,7 +144,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
           $n=1;
         }
       
-      $taux1=$taux;
+      echo $taux1=$taux;
 
       $calcul=-1;
 
@@ -161,7 +161,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
           $n=1;
         }
 
-      $taux2=$taux;
+      echo $taux2=$taux;
 
       $calcul=-1;
 
@@ -178,8 +178,10 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
           $n=1;
         }
 
-      $taux3=$taux;
-
+      echo $taux3=$taux;
   }
-
 }
+$pret1= new Pret(100000,920,30,10,500);
+$pret1->taux();
+
+?>
