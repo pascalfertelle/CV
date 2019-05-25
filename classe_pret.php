@@ -9,11 +9,11 @@ class Pret
 
   public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 paramètres
   {
-    $this->setMensualite($K);// Initialisation du capital K.
+    $this->setK($K);// Initialisation du capital K.
     $this->setMensualite($mensualite); // Initialisation de la mensualité.
     $this->setAssurance($assurance); // Initialisation de l'assurance.
     $this->setDuree($duree); // Initialisation de la durée.
-    $this->setFraisDedossier($assurance);//Initialisation des frais de dossier.
+    $this->setFraisDedossier($FraisDeDossier);//Initialisation des frais de dossier.
   }
 
   // Mutateur chargé de modifier l'attribut $_K.
@@ -25,7 +25,7 @@ class Pret
       return;
     }
 
-if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+if ($K < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('La montant d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
@@ -49,7 +49,7 @@ if ($mensualite < 0) // On vérifie bien qu'on ne souhaite pas assigner une vale
       return;
     }
 
-    $this->_mensualite = $mensualité;
+    $this->_mensualite = $mensualite;
   }
 
  // Mutateur chargé de modifier l'attribut $_assurance.
@@ -61,7 +61,7 @@ if ($mensualite < 0) // On vérifie bien qu'on ne souhaite pas assigner une vale
       return;
     }
 
-if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+if ($assurance < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('L\'assurance d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
@@ -79,13 +79,14 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
       return;
     }
 
-if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('La durée d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
     }
-
+    $duree=$duree;
     $this->_duree = 12*$duree;
+
   }
 
    // Mutateur chargé de modifier l'attribut $_FraisDeDossier.
@@ -98,7 +99,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
     }
 
 
-    if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+    if ($FraisDeDossier < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
     {
       trigger_error('Ls frais de dossier d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
@@ -113,6 +114,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
   	$calcul=10;
   	$n=1;
   	$taux=0.005;
+  	$K=$this->_K;
   	$m=$this->_mensualite;
   	$durée=$this->_duree;
   	$a=$this->_assurance;
@@ -129,8 +131,6 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
           $calcul=$K-$calcul;
           $n=1;
         }
-
-
       while ($calcul<-0.00001) 
         {
           $calcul=0;
@@ -181,7 +181,7 @@ if ($force < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
       echo $taux3=$taux;
   }
 }
-$pret1= new Pret(100000,920,30,10,500);
+$pret1= new Pret(100000,900,30,10,500);
 $pret1->taux();
 
 ?>
