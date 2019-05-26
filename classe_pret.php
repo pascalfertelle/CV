@@ -6,6 +6,9 @@ class Pret
   private $_assurance;
   private $_duree;
   private $_FraisDeDossier;
+  private $_TAEG;
+  private $_ImpactFraisDeDossier;
+  private $_ImpacteAssurance;
 
   public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 param√®tres
   {
@@ -14,6 +17,7 @@ class Pret
     $this->setAssurance($assurance); // Initialisation de l'assurance.
     $this->setDuree($duree); // Initialisation de la dur√©e.
     $this->setFraisDedossier($FraisDeDossier);//Initialisation des frais de dossier.
+    $this->setTaux();//Initialisation de TAEG, ImpactFraisDeDossier, ImpactAssurance.
   }
 
   // Mutateur charg√© de modifier l'attribut $_K.
@@ -109,7 +113,7 @@ if ($duree < 0) // On v√©rifie bien qu'on ne souhaite pas assigner une valeur n√
   }
 
 
-  public function taux()
+  public function setTaux()
   {
   	$calcul=10;
   	$n=1;
@@ -144,7 +148,7 @@ if ($duree < 0) // On v√©rifie bien qu'on ne souhaite pas assigner une valeur n√
           $n=1;
         }
       
-      echo $taux1=$taux;
+      $taux1=$taux;
 
       $calcul=-1;
 
@@ -161,7 +165,7 @@ if ($duree < 0) // On v√©rifie bien qu'on ne souhaite pas assigner une valeur n√
           $n=1;
         }
 
-      echo $taux2=$taux;
+      $taux2=$taux;
 
       $calcul=-1;
 
@@ -178,10 +182,16 @@ if ($duree < 0) // On v√©rifie bien qu'on ne souhaite pas assigner une valeur n√
           $n=1;
         }
 
-      echo $taux3=$taux;
+      $taux3=$taux;
+      $this->_TAEG = round((((1+$taux3)**12-1)*100),2);
+      echo $this->_TAEG.'   ';
+      $this->_ImpactFraisDeDossier = round(((((1+$taux2)**12-1)-((1+$taux1)**12-1))*100),2);
+      echo $this->_ImpactFraisDeDossier.'   ';
+      $this->_ImpacteAssurance = round(((((1+$taux3)**12-1)-((1+$taux2)**12-1))*100),2);
+      echo $this->_ImpacteAssurance;
   }
 }
 $pret1= new Pret(100000,900,30,10,500);
-$pret1->taux();
+
 
 ?>
