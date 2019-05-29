@@ -10,7 +10,7 @@ class Pret
   private $_ImpactFraisDeDossier;
   private $_ImpacteAssurance;
 
-  public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 4 paramètres
+  public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 5 paramètres
   {
     $this->setK($K);// Initialisation du capital K.
     $this->setMensualite($mensualite); // Initialisation de la mensualité.
