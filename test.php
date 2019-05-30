@@ -44,14 +44,17 @@ catch (Exception $e)
         die('Erreur : ' . $e->getMessage());
 }
 
-$reponse = $bdd->query('SELECT * FROM formulaire'); 
+$reponse = $bdd->query('SELECT * FROM pret_caracteristiques'); 
 //methode query de la classe PDO,Exécute une requête SQL, retourne un jeu de résultats en tant qu'objet PDOStatement
-
+$test=$reponse->fetch(PDO::FETCH_ASSOC);
+print_r($test);
+$test=$reponse->fetch(PDO::FETCH_BOTH);
+print_r($test);
 while ($donnees = $reponse->fetch())
 //PDOStatement::fetch — Récupère la ligne suivante d'un jeu de résultats PDO 
 {
 ?>
-<p><?php echo $donnees['id'].' '.$donnees['adresse_mail']; ?></p>
+<p><?php echo 'id= '.$donnees['id'].' Kemprunte= '.$donnees['Kemprunte'].'frais de dossier= '.$donnees['frais_de_dossier']; ?></p>
 
 <?php
 }
@@ -59,7 +62,13 @@ while ($donnees = $reponse->fetch())
 $reponse->closeCursor(); // Termine le traitement de la requête
 
 // On ajoute une entrée dans la table jeux_video
-$bdd->exec('INSERT INTO formulaire(nom, sexe, adresse_mail, adresse_ip, date) VALUES(\'Sandy\', \'Madame\', \'s@gmail.fr\',\'72.72.72.72\', \'2019-07-16 08:00:00\')');
+$variable=$bdd->exec('INSERT INTO formulaire(nom, sexe, adresse_mail, adresse_ip, date) VALUES(\'MOMO\', \'Madame\', \'s@gmail.fr\',\'72.72.72.72\', \'2019-07-16 08:00:00\')');
+
+echo 'le nombre de lignes modifiées est de '.$variable;
+
+$suppression=$bdd->exec('DELETE FROM formulaire WHERE nom="Sandy"');
+echo 'le nombre de lignes supprimées est de '.$suppression;
+
 
 ?>
 

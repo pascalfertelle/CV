@@ -9,6 +9,10 @@ class Pret
   private $_TAEG;
   private $_ImpactFraisDeDossier;
   private $_ImpacteAssurance;
+  private $_taux1;
+
+  const N=1;
+
 
   public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 5 paramètres
   {
@@ -112,11 +116,57 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
     $this->_FraisDeDossier = $FraisDeDossier;
   }
 
+// Liste des getters
+
+  public function K()
+  {
+    return $this->_K;
+  }
+
+   public function mensualite()
+  {
+    return $this->_mensualite;
+  }
+
+ public function assurance()
+  {
+    return $this->_assurance;
+  }
+
+ public function duree()
+  {
+    return $this->_duree;
+  }
+
+ public function FraisDeDossier()
+  {
+    return $this->_FraisDeDossier;
+  }
+
+  
+  public function TAEG()
+  {
+    return $this->_TAEG;
+  }
+
+  public function ImpactFraisDeDossier()
+  {
+    return $this->_ImpactFraisDeDossier;
+  }
+  
+
+  public function ImpactAssurance()
+  {
+    return $this->_ImpactAssurance;
+  }
+
+
+
 
   public function setTaux()
   {
   	$calcul=10;
-  	$n=1;
+  	$n=self::N;
   	$taux=0.005;
   	$K=$this->_K;
   	$m=$this->_mensualite;
@@ -149,6 +199,7 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
         }
       
       $taux1=$taux;
+      $this->_taux1
 
       $calcul=-1;
 
@@ -184,14 +235,24 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
 
       $taux3=$taux;
       $this->_TAEG = round((((1+$taux3)**12-1)*100),2);
-      echo $this->_TAEG.'   ';
       $this->_ImpactFraisDeDossier = round(((((1+$taux2)**12-1)-((1+$taux1)**12-1))*100),2);
-      echo $this->_ImpactFraisDeDossier.'   ';
-      $this->_ImpacteAssurance = round(((((1+$taux3)**12-1)-((1+$taux2)**12-1))*100),2);
-      echo $this->_ImpacteAssurance;
+      $this->_ImpactAssurance = round(((((1+$taux3)**12-1)-((1+$taux2)**12-1))*100),2);
+  }
+
+  public function ArrayAmortissement()
+  {
+  	$n=self::N;
+  while ($n<=$durée) 
+	{
+
+	$intêrets=$K*$taux1;
+	$intêrets=round($intêrets,2);
+	$Kremboursé=$m-$intêrets;
+	$K=$K-$Kremboursé;
   }
 }
 $pret1= new Pret(100000,900,30,10,500);
-
-
+echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
+echo 'les frais de dossier ont un impact de '.$pret1->ImpactFraisDeDossier().'% sur le TAEG<br>';
+echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le TAEG';
 ?>

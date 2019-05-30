@@ -35,8 +35,10 @@
 		    {
 		    die('Erreur : ' . $e->getMessage());
 		    }
-		    $req=$bdd->prepare('TRUNCATE TABLE pret_immobilier');
-	 		$req->execute(array());
+		    $req=$bdd->query('TRUNCATE TABLE pret_immobilier');
+	 		$req = $bdd->prepare('INSERT INTO pret_caracteristiques(Kemprunte, frais_de_dossier, duree, mensualite, assurance) VALUES
+	 		(:Kemprunte, :frais_de_dossier, :duree,:mensualite, :assurance)');
+	 		$req->execute(array('Kemprunte' => $_POST["capital_emprunté"], 'frais_de_dossier' => $_POST["frais_de_dossier"] , 'duree' => $_POST["durée"], 'mensualite'=>$_POST["mensualité"] , 'assurance'=> $_POST["assurance"]));
 			$req->closeCursor();
 
 			echo '<div class="flexbox4">';
