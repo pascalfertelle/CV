@@ -242,7 +242,7 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
   public function ArrayAmortissement()
   {
   	$n=self::N;
-  while ($n<=$durée) 
+  while ($n <= $this->$durée) 
 	{
 
 	$intêrets=$K*$taux1;
