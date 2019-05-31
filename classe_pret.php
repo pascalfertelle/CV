@@ -5,6 +5,7 @@ class Pret
   private $_mensualite;
   private $_assurance;
   private $_duree;
+  private $_date;
   private $_FraisDeDossier;
   private $_TAEG;
   private $_ImpactFraisDeDossier;
@@ -14,12 +15,13 @@ class Pret
   const N=1;
 
 
-  public function __construct($K, $mensualite, $assurance,$duree,$FraisDeDossier) // Constructeur demandant 5 paramètres
+  public function __construct($K, $mensualite, $assurance,$duree,$date,$FraisDeDossier) // Constructeur demandant 5 paramètres
   {
     $this->setK($K);// Initialisation du capital K.
     $this->setMensualite($mensualite); // Initialisation de la mensualité.
     $this->setAssurance($assurance); // Initialisation de l'assurance.
     $this->setDuree($duree); // Initialisation de la durée.
+    $this->setDate($date); // Initialisation de la date.
     $this->setFraisDedossier($FraisDeDossier);//Initialisation des frais de dossier.
     $this->setTaux();//Initialisation de TAEG, ImpactFraisDeDossier, ImpactAssurance.
   }
@@ -92,8 +94,26 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
       trigger_error('La durée d\'un prêt ne peut être négative', E_USER_WARNING);
       return;
     }
-    $duree=$duree;
+
     $this->_duree = 12*$duree;
+
+  }
+
+    // Mutateur chargé de modifier l'attribut $_date.
+  public function setDuree($date)
+  {
+    if (!is_int($date)) // S'il ne s'agit pas d'un nombre entier.
+    {
+      trigger_error('La durée d\'un prêt doit être un nombre entier', E_USER_WARNING);
+      return;
+    }
+
+if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négative.
+    {
+      trigger_error('La durée d\'un prêt ne peut être négative', E_USER_WARNING);
+      return;
+    }
+    $this->_date= $date;
 
   }
 
@@ -242,6 +262,12 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
   public function ArrayAmortissement()
   {
   	$n=self::N;
+    $K=$this->_K;
+    $a=$this->_assurance;
+    $m=$this->_mensualite;
+    $durée=$this->_duree;
+    $taux1=$this->_taux1;
+    $tableau=array()
   while ($n <= $this->$durée) 
 	{
 
@@ -249,6 +275,8 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
 	$intêrets=round($intêrets,2);
 	$Kremboursé=$m-$intêrets;
 	$K=$K-$Kremboursé;
+
+  $tableau[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a)));
   }
 }
 $pret1= new Pret(100000,900,30,10,500);
