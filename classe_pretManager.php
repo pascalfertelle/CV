@@ -3,8 +3,6 @@ class PretManager
 {
   private $_db;
 
-  const N=1;
-
 
   public function __construct($db)
   {
@@ -21,15 +19,25 @@ class PretManager
   $req->execute(array('Kemprunte' => $pret->K(), 'frais_de_dossier' => $pret->FraisDeDossier() , 'duree' => $pret->duree(), 'mensualite'=>$pret->mensualite() , 'assurance'=> $pret->assurance()));
   }
 
-  public function addTableauAmortissement(Pret $pret)
+  public function addTableauAmortissement(Pret $pret) 
+  //http://blog.nalis.fr/index.php?post/2011/04/15/PDO%3A-insertion-multiple-en-une-seul-requete.
   {
-  	$n=self::N;
-  	while ($n<= $pret->duree())
-  	{
-  	$req = $bdd->prepare('INSERT INTO pret_immobilier(intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES(:interets, :Krembourse, :K, :date_de_remboursement, :assurance_du_pret, :montant_total_a_rembourser)');
-	 $req->execute(array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'assurance_du_pret'=> $_POST["assurance"], 'montant_total_a_rembourser' => ($m+$a)));
-  	}
-  }
+  	$data=$pret->TableauAmortissement();
+    $params=substr(str_repeat("?,", count($data[0])), 0, -1);
+    $params=substr(str_repeat("(".$params."),", count($data)), 0, -1);
+    $a=array();
+    foreach ($params AS $param)
+    {
+    $a=array_merge($a, array_values($param));
+    }
+
+    $querySQL="INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params;
+    $state = $this->_db->prepare($querySQL);
+       
+    $state->execute($a);
+    return $this->_db->lastInsertId();
+       
+    }
 
   public function setDb (PDO $db)
   {
