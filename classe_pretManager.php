@@ -31,10 +31,9 @@ class PretManager
     $a=array_merge($a, array_values($param));
     }
 
-    $querySQL="INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params;
-    $state = $this->_db->prepare($querySQL);
+    $state = $this->_db->prepare("INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params);
        
-    $state->execute($a);
+    $state->execute($data);
     return $this->_db->lastInsertId();
        
     }
