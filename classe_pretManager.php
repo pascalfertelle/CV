@@ -19,6 +19,12 @@ class PretManager
   $req->execute(array('Kemprunte' => $pret->K(), 'frais_de_dossier' => $pret->FraisDeDossier() , 'duree' => $pret->duree(), 'mensualite'=>$pret->mensualite() , 'assurance'=> $pret->assurance()));
   }
 
+  public function dellTablepret_immobilier ()
+
+ {
+ 	$this->_bd->query('TRUNCATE TABLE pret_immobilier');
+ }
+
   public function addTableauAmortissement(Pret $pret) 
   //http://blog.nalis.fr/index.php?post/2011/04/15/PDO%3A-insertion-multiple-en-une-seul-requete.
   {
