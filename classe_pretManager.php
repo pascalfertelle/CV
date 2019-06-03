@@ -23,17 +23,17 @@ class PretManager
   //http://blog.nalis.fr/index.php?post/2011/04/15/PDO%3A-insertion-multiple-en-une-seul-requete.
   {
   	$data=$pret->TableauAmortissement();
-    $params=substr(str_repeat("?,", count($data[0])), 0, -1);
+    $params=substr(str_repeat("?,", count($data[1])), 0, -1);
     $params=substr(str_repeat("(".$params."),", count($data)), 0, -1);
     $a=array();
-    foreach ($params AS $param)
+    foreach ($data AS $param)
     {
     $a=array_merge($a, array_values($param));
     }
 
     $state = $this->_db->prepare("INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params);
        
-    $state->execute($data);
+    $state->execute($a);
     return $this->_db->lastInsertId();
        
     }
@@ -43,4 +43,10 @@ class PretManager
   $this->_db = $db;
   }
 }
+
+require 'classe_pret.php';
+$pret1= new Pret(100000,900,30,10,'12-06-10',500);
+$db = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f');
+$pretManager1=new PretManager($db);
+$pretManager1->addTableauAmortissement($pret1);
 
