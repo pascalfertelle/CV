@@ -43,10 +43,9 @@
 		    $pretManager1=new PretManager($db);
 		    $pretManager1->dellTablepret_immobilier ();
 		    $pret1= new Pret($_POST["capital_emprunté"],$_POST['mensualité'],$_POST['assurance'],$_POST['durée'],$_POST["date"],$_POST['frais_de_dossier']);
-
-			echo '<div class="flexbox4">';
-			
-			$today= new DateTime();
+		    $array=$pret1->TableauAmortissement();
+		    $pretManager1->addTableauAmortissement($pret1);
+		    $today= new DateTime();
 			$date1= new DateTime ($_POST["date"]);
 
 			if ($date<$today)
@@ -56,8 +55,8 @@
 				settype($interval, "integer");
 				}
 
-			echo 
-			'<div id="scrollbar"><table class="élément">
+			echo '<div class="flexbox4">
+			<div id="scrollbar"><table class="élément">
 			<caption>Tableau d\'amortissement</caption>
 			<tr>
 			<th>Mensualité</th>
@@ -97,18 +96,6 @@
 					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$_POST["assurance"].'</td>';}
 					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.($m+$a).'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
-
-				try
-		        {
-			    $bdd = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f'); //On construit une instance de la classe PDO.
-		        }
-		        catch (Exception $e)
-		        {
-		        die('Erreur : ' . $e->getMessage());
-		    	}
-		        $req = $bdd->prepare('INSERT INTO pret_immobilier(intérêts, Kremboursé, K, date_de_remboursement, assurance_du_prêt, montant_total_à_rembourser) VALUES(:interets, :Krembourse, :K, :date_de_remboursement, :assurance_du_pret, :montant_total_a_rembourser)');
-	 			$req->execute(array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'assurance_du_pret'=> $_POST["assurance"], 'montant_total_a_rembourser' => ($m+$a)));
-				$req->closeCursor();
 					  
 					  
 				$n=$n+1;
