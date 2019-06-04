@@ -50,9 +50,9 @@ class PretManager
   }
 }
 
-require 'classe_pret.php';
+/*require 'classe_pret.php';
 $pret1= new Pret(100000,900,30,10,'12-06-10',500);
 $db = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f');
 $pretManager1=new PretManager($db);
-$pretManager1->addTableauAmortissement($pret1);
+$pretManager1->addTableauAmortissement($pret1);*/
 
