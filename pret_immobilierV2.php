@@ -27,6 +27,7 @@
 		<?php
 		if (isset ($_POST["date"]) && isset ($_POST["capital_emprunté"]) && isset ($_POST["frais_de_dossier"]) && isset ($_POST["durée"]) && isset ($_POST["mensualité"]) && isset ($_POST["assurance"]))
 		{   
+			echo gettype($_POST["capital_emprunté"]);
 			try
 		    {
 			$db = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f'); //On construit une instance de la classe PDO.
@@ -87,14 +88,14 @@
 					}
 
 						echo '>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][0].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$intêrets.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$Kremboursé.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$K.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$date.'</td>';
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$ligne.'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][1].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][2].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][3].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][4].'</td>';
 					  if ($_POST["assurance"]!==0)
-					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$_POST["assurance"].'</td>';}
-					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.($m+$a).'</td>';
+					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[$ligne][5].'</td>';}
+					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][6].'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
 					  
 			}

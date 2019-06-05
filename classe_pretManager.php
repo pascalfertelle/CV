@@ -22,7 +22,7 @@ class PretManager
   public function dellTablepret_immobilier ()
 
  {
- 	$this->_bd->query('TRUNCATE TABLE pret_immobilier');
+ 	$this->_db->query('TRUNCATE TABLE pret_immobilier');
  }
 
   public function addTableauAmortissement(Pret $pret) 
