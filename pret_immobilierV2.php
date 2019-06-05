@@ -48,6 +48,7 @@
 		    $today= new DateTime();
 			$date1= new DateTime ($_POST["date"]);
 
+
 			if ($date<$today)
 				{
 				$interval=date_diff($date1,$today);
@@ -67,13 +68,12 @@
 			if ($_POST["assurance"]!==0)
 			{echo '<th>Assurance du prêt</th>';}
 			echo '<th>Montant total à rembourser</th></tr>';
-			while ($n<=$durée) 
-			{
 
-				$intêrets=$K*$taux1;
-				$intêrets=round($intêrets,2);
-				$Kremboursé=$m-$intêrets;
-				$K=$K-$Kremboursé;
+			foreach($array as $ligne)
+			{
+				foreach($ligne as $values)
+			
+
 				$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
 				echo '<tr';
 
@@ -87,7 +87,7 @@
 					}
 
 						echo '>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$n.'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][0].'</td>
 					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$intêrets.'</td>
 					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$Kremboursé.'</td>
 					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$K.'</td>
@@ -97,8 +97,6 @@
 					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.($m+$a).'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
 					  
-					  
-				$n=$n+1;
 			}
 		echo '</table></div>
 		<div>
