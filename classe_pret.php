@@ -30,7 +30,7 @@ class Pret
 
   // Mutateur chargé de modifier l'attribut $_K.
   public function setK($K)
-  {settype($K, float);
+  {settype($K, "float");
     if (!is_float($K)) // S'il ne s'agit pas d'un nombre entier.
     {
       trigger_error('La montant d\'un prêt doit être un nombre entier', E_USER_WARNING);
@@ -48,7 +48,7 @@ if ($K < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur négat
 
   // Mutateur chargé de modifier l'attribut $_mensualite.
   public function setMensualite($mensualite)
-  {settype($mensualite, integer);
+  {settype($mensualite, "integer");
     if (!is_int($mensualite)) // S'il ne s'agit pas d'un nombre entier.
     {
       trigger_error('La mensualité d\'un prêt doit être un nombre entier', E_USER_WARNING);
@@ -66,7 +66,7 @@ if ($mensualite < 0) // On vérifie bien qu'on ne souhaite pas assigner une vale
 
  // Mutateur chargé de modifier l'attribut $_assurance.
   public function setAssurance($assurance)
-  {settype($assurance, float);
+  {settype($assurance, "float");
     if (!is_float($assurance)) // S'il ne s'agit pas d'un nombre entier.
     {
       trigger_error('L\'assurance d\'un prêt doit être un nombre entier', E_USER_WARNING);
@@ -84,7 +84,7 @@ if ($assurance < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeu
 
    // Mutateur chargé de modifier l'attribut $_duree.
   public function setDuree($duree)
-  { settype($duree, integer);
+  { settype($duree, "integer");
     if (!is_int($duree)) // S'il ne s'agit pas d'un nombre entier.
     {
       trigger_error('La durée d\'un prêt doit être un nombre entier', E_USER_WARNING);
@@ -104,7 +104,7 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
     // Mutateur chargé de modifier l'attribut $_date.
   public function setDate($date)
   {$date=date('Y-m-d',strtotime($date));
-  	list($jour, $mois, $annee) = explode("-", $date);
+  	list($annee, $mois, $jour) = explode("-", $date);
     if(!checkdate($mois,$jour,$annee)) // S'il ne s'agit pas d'une date correcte.
     {
       trigger_error('La date n\'est pas valide', E_USER_WARNING);
@@ -117,7 +117,7 @@ if ($duree < 0) // On vérifie bien qu'on ne souhaite pas assigner une valeur n�
 
    // Mutateur chargé de modifier l'attribut $_FraisDeDossier.
   public function setFraisDeDossier($FraisDeDossier)
-  {settype($FraisDeDossier, float);
+  {settype($FraisDeDossier, "float");
     if (!is_float($FraisDeDossier)) // S'il ne s'agit pas d'un nombre entier.
     {
       trigger_error('Les frais de dossier d\'un prêt doit être un nombre entier', E_USER_WARNING);
