@@ -73,8 +73,8 @@
 			{
 				foreach($ligne as $values)
 			
-
-				$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
+				$n=1;
+				$date=date('Y-m-d',strtotime('+1 month',strtotime($_POST["date"])));
 				echo '<tr';
 
 					if ($n<=$interval)
@@ -87,14 +87,14 @@
 					}
 
 						echo '>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$ligne.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][1].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][2].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][3].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][4].'</td>';
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$n.'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][1].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][2].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][3].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][4].'</td>';
 					  if ($_POST["assurance"]!==0)
-					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[$ligne][5].'</td>';}
-					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$ligne][6].'</td>';
+					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[.$n.][5].'</td>';}
+					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][6].'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
 					  
 			}
