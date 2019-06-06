@@ -96,6 +96,7 @@
 					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[.$n.][5].'</td>';}
 					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][6].'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
+					  $n=$n+1;
 					  
 			}
 		echo '</table></div>
