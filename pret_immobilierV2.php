@@ -47,6 +47,7 @@
 		    $pretManager1->addTableauAmortissement($pret1);
 		    $today= new DateTime();
 			$date1= new DateTime ($_POST["date"]);
+			$n=1;
 
 
 			if ($date1<$today)
@@ -72,8 +73,6 @@
 			foreach($array as $ligne)
 			{
 				foreach($ligne as $values)
-			
-				$n=1;
 				$date=date('Y-m-d',strtotime('+1 month',strtotime($_POST["date"])));
 				echo '<tr';
 
@@ -88,22 +87,22 @@
 
 						echo '>
 					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$n.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][1].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][2].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][3].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][4].'</td>';
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['interets'].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['Krembourse'].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['K'].'</td>
+					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['date_de_remboursement'].'</td>';
 					  if ($_POST["assurance"]!==0)
-					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[.$n.][5].'</td>';}
-					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[.$n.][6].'</td>';
+					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[$n]['assurance_du_pret'].'</td>';}
+					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['montant_total_a_rembourser'].'</td>';
 					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
 					  $n=$n+1;
 					  
 			}
 		echo '</table></div>
 		<div>
-		<h1 class="TAEG"> Le TAEG est de '.round((((1+$taux3)**12-1)*100),2).'%</h1>
-		<h2 class="TAEG"> L\'impact des frais de dossier sur le TAEG est de '.round(((((1+$taux2)**12-1)-((1+$taux1)**12-1))*100),2).'%</h2>
-		<h2 class="TAEG">L\'impact de l\'assurance du prêt sur le TAEG est de '.round(((((1+$taux3)**12-1)-((1+$taux2)**12-1))*100),2).'%</h2>
+		<h1 class="TAEG"> Le TAEG est de '.$pret1->TAEG().'%</h1>
+		<h2 class="TAEG"> L\'impact des frais de dossier sur le TAEG est de '.$pret1->ImpactFraisDeDossier().'%</h2>
+		<h2 class="TAEG">L\'impact de l\'assurance du prêt sur le TAEG est de '.$pret1->ImpactAssurance().'%</h2>
 		</div>
 		</div>';
 		}
