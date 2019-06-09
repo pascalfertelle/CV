@@ -269,9 +269,34 @@ public function TableauAmortissement()
     $durée=$this->_duree;
     $taux1=$this->_taux1;
     $date=$this->_date;
+    $today= new DateTime();
+	$date1= new DateTime ($date);
+	if ($date1<$today)
+	{
+	$interval=date_diff($date1,$today);
+	$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
+	settype($interval, "integer");
+	}
     $tableauAmortissement=array();
   while ($n <= $durée) 
 	{
+		if ($n<=$interval)
+					{
+					$couleur='green';
+					}
+					else
+					{
+					$couleur='red';
+					}
+
+		if($n==($interval+1))
+					{
+						$echeance="prochaine_échéance";
+					}
+		else
+					{
+						$echeance="autre";
+					}
 
 	$intêrets=$K*$taux1;
 	$intêrets=round($intêrets,2);
@@ -279,7 +304,7 @@ public function TableauAmortissement()
 	$K=$K-$Kremboursé;
 	$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
 
-  	$tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
+  	$tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'couleur'=>$couleur, 'echeance' =>$echeance, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
 
   	$n=$n+1;
   	}
@@ -291,4 +316,4 @@ public function TableauAmortissement()
 echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
 echo 'les frais de dossier ont un impact de '.$pret1->ImpactFraisDeDossier().'% sur le TAEG<br>';
 echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le TAEG';
-print_r($pret1->TableauAmortissement());/*
+print_r($pret1->TableauAmortissement());*/

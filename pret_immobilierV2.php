@@ -72,29 +72,16 @@
 
 			foreach($array as $ligne)
 			{
-				foreach($ligne as $values)
-				$date=date('Y-m-d',strtotime('+1 month',strtotime($_POST["date"])));
-				echo '<tr';
-
-					if ($n<=$interval)
-					{
-					echo ' class="green"';
-					}
-					else
-					{
-					echo ' class="red"';
-					}
-
-						echo '>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$n.'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['interets'].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['Krembourse'].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['K'].'</td>
-					  <td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['date_de_remboursement'].'</td>';
+				echo '<tr class= '.$array[$n]['couleur'].'>
+					  <td class= '.$array[$n]['echeance'].'>'.$n.'</td>
+					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['interets'].'</td>
+					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['Krembourse'].'</td>
+					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['K'].'</td>
+					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['date_de_remboursement'].'</td>';
 					  if ($_POST["assurance"]!==0)
-					  {echo '<td'; if($n==$interval+1) {echo ' class="échéance"';}  else {echo ' class="autre"';} echo'>'.$array[$n]['assurance_du_pret'].'</td>';}
-					  echo '<td'; if($n==$interval+1) {echo ' class="échéance"';} else {echo ' class="autre"';} echo'>'.$array[$n]['montant_total_a_rembourser'].'</td>';
-					  if($n==$interval+1) {echo'<td class="échéance"> prochaine échéance</td>';} echo '</tr>';
+					  {echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['assurance_du_pret'].'</td>';}
+					  echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['montant_total_a_rembourser'].'</td>';
+					  if($n==$interval+1) {echo'<td class= '.$array[$n]['echeance'].'> prochaine échéance</td>';} echo '</tr>';
 					  $n=$n+1;
 					  
 			}
