@@ -45,17 +45,7 @@
 		    $pret1= new Pret($_POST["capital_emprunté"],$_POST['mensualité'],$_POST['assurance'],$_POST['durée'],$_POST["date"],$_POST['frais_de_dossier']);
 		    $array=$pret1->TableauAmortissement();
 		    $pretManager1->addTableauAmortissement($pret1);
-		    $today= new DateTime();
-			$date1= new DateTime ($_POST["date"]);
 			$n=1;
-
-
-			if ($date1<$today)
-				{
-				$interval=date_diff($date1,$today);
-				$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
-				settype($interval, "integer");
-				}
 
 			echo '<div class="flexbox4">
 			<div id="scrollbar"><table class="élément">
@@ -66,7 +56,7 @@
 			<th>Capital remboursé</th>
 			<th>Capital restant dû</th>
 			<th>date de remboursement</th>';
-			if ($_POST["assurance"]!==0)
+			if ($pret1->assurance()=0)
 			{echo '<th>Assurance du prêt</th>';}
 			echo '<th>Montant total à rembourser</th></tr>';
 
@@ -78,10 +68,10 @@
 					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['Krembourse'].'</td>
 					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['K'].'</td>
 					  <td class= '.$array[$n]['echeance'].'>'.$array[$n]['date_de_remboursement'].'</td>';
-					  if ($_POST["assurance"]!==0)
+					  if ($array[$n]['assurance_du_pret']!=0)
 					  {echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['assurance_du_pret'].'</td>';}
 					  echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['montant_total_a_rembourser'].'</td>';
-					  if($n==$interval+1) {echo'<td class= '.$array[$n]['echeance'].'> prochaine échéance</td>';} echo '</tr>';
+					  if($array[$n]['echeance']="prochaine_échéance") {echo'<td class= '.$array[$n]['echeance'].'> prochaine échéance</td>';} echo '</tr>';
 					  $n=$n+1;
 					  
 			}

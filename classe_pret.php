@@ -262,14 +262,14 @@ public function TableauAmortissement()
 
   public function setTableauAmortissement()
   {
-  	$n=self::N;
-    $K=$this->_K;
-    $a=$this->_assurance;
-    $m=$this->_mensualite;
-    $durée=$this->_duree;
-    $taux1=$this->_taux1;
-    $date=$this->_date;
-    $today= new DateTime();
+  $n=self::N;
+  $K=$this->_K;
+  $a=$this->_assurance;
+  $m=$this->_mensualite;
+  $durée=$this->_duree;
+  $taux1=$this->_taux1;
+  $date=$this->_date;
+  $today= new DateTime();
 	$date1= new DateTime ($date);
 	if ($date1<$today)
 	{
@@ -277,43 +277,125 @@ public function TableauAmortissement()
 	$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
 	settype($interval, "integer");
 	}
-    $tableauAmortissement=array();
-  while ($n <= $durée) 
-	{
-		if ($n<=$interval)
-					{
-					$couleur='green';
-					}
-					else
-					{
-					$couleur='red';
-					}
+  $tableauAmortissement=array();
+    while ($n <= $durée) 
+  	{
+  		if ($n<=$interval)
+  					{
+  					$couleur='green';
+  					}
+  					else
+  					{
+  					$couleur='red';
+  					}
 
-		if($n==($interval+1))
-					{
-						$echeance="prochaine_échéance";
-					}
-		else
-					{
-						$echeance="autre";
-					}
+  		if($n=($interval+1))
+  					{
+  						$echeance="prochaine_échéance";
+  					}
+  		else
+  					{
+  						$echeance="autre";
+  					}
 
-	$intêrets=$K*$taux1;
-	$intêrets=round($intêrets,2);
-	$Kremboursé=$m-$intêrets;
-	$K=$K-$Kremboursé;
-	$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
+  	$intêrets=$K*$taux1;
+  	$intêrets=round($intêrets,2);
+  	$Kremboursé=$m-$intêrets;
+  	$K=$K-$Kremboursé;
+  	$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
+    $tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'couleur'=>$couleur, 'echeance' =>$echeance, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
 
-  	$tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'couleur'=>$couleur, 'echeance' =>$echeance, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
+    $n=$n+1;
+    }
+  $this->_tableauAmortissement=$tableauAmortissement;
+  }
 
-  	$n=$n+1;
-  	}
-  	$this->_tableauAmortissement=$tableauAmortissement;
+  public function GraphiquePretImmobilier()   //utilsation tablebarex1.php de jpgraph.
+  {
+  include ("jpgraph.php");
+  include ("jpgraph_bar.php");
+  include ("jpgraph_table.php");
+
+  $datay = $this->_tableauAmortissement;
+
+  $assuranceArray=array();
+  $interetsArray=array();
+  $KrembourseArray=array();
+  $date_de_remboursementArray=array();
+  $n=1;
+  foreach($datay as $ligne)
+        { 
+          $date_de_remboursementArray=$datay[$n]['date_de_remboursement'];
+          $assurance_du_pretArray[$n]=$datay[$n]['assurance_du_pret'];
+          $interetsArray[$n]=$datay[$n]['interets'];
+          $KrembourseArray[$n]=$datay[$n]['Krembourse'];
+          $n=$n+1;
+        }
+  $datay = array($date_de_remboursementArray , $assurance_du_pretArray , $interetsArray , $KrembourseArray);
+
+  // Some basic defines to specify the shape of the bar+table
+  $nbrbar = $this->_duree;
+  $cellwidth = 50;
+  $tableypos = 200;
+  $tablexpos = 60;
+  $tablewidth = $nbrbar*$cellwidth;
+  $rightmargin = 30;
+
+  // Overall graph size
+  $height = 320;
+  $width = $tablexpos+$tablewidth+$rightmargin;
+
+  // Create the basic graph. 
+  $graph = new Graph($width,$height); 
+  $graph->img->SetMargin($tablexpos,$rightmargin,30,$height-$tableypos);
+  $graph->SetScale("textlin");
+  $graph->SetMarginColor('white');
+
+  // Setup titles and fonts
+  $graph->title->Set('Pret immobilier');
+  $graph->title->SetFont(FF_VERDANA,FS_NORMAL,14);
+  $graph->yaxis->title->Set("Mensualité");
+  $graph->yaxis->title->SetFont(FF_ARIAL,FS_NORMAL,12);
+  $graph->yaxis->title->SetMargin(10);
+
+  // Create the bars and the accbar plot
+
+  $bplot = new BarPlot($KrembourseArray);
+  $bplot->SetFillColor("orange");
+  $bplot2 = new BarPlot($interetsArray);
+  $bplot2->SetFillColor("red");
+  $bplot3 = new BarPlot($assuranceArray);
+  $bplot3->SetFillColor("darkgreen");
+  $accbplot = new AccBarPlot(array($bplot,$bplot2,$bplot3));
+  $accbplot->value->Show();
+  $graph->Add($accbplot);
+
+  //Setup the table
+  $table = new GTextTable();
+  $table->Set($datay);
+  $table->SetPos($tablexpos,$tableypos+1);
+
+  // Basic table formatting
+  $table->SetFont(FF_ARIAL,FS_NORMAL,10);
+  $table->SetAlign('right');
+  $table->SetMinColWidth($cellwidth);
+  $table->SetNumberFormat('%0.1f');
+
+  // Format table header row
+  $table->SetRowFillColor(0,'teal@0.7');
+  $table->SetRowFont(0,FF_ARIAL,FS_BOLD,11);
+  $table->SetRowAlign(0,'center');
+
+  // .. and add it to the graph
+  $graph->Add($table);
+
+  $graph->Stroke();
   }
 }
 
-/*$pret1= new Pret(100000,900,30,10,'12-06-10',500);
+$pret1= new Pret(100000,900,30,10,'12-06-10',500);
 echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
 echo 'les frais de dossier ont un impact de '.$pret1->ImpactFraisDeDossier().'% sur le TAEG<br>';
 echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le TAEG';
-print_r($pret1->TableauAmortissement());*/
+print_r($pret1->TableauAmortissement());
+$pret1->GraphiquePretimmobilier();
