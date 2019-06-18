@@ -56,7 +56,7 @@
 			<th>Capital remboursé</th>
 			<th>Capital restant dû</th>
 			<th>date de remboursement</th>';
-			if ($_POST['assurance']==0)
+			if ($_POST['assurance']!==0)
 			{echo '<th>Assurance du prêt</th>';}
 			echo '<th>Montant total à rembourser</th></tr>';
 
