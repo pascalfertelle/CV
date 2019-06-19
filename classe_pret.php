@@ -25,7 +25,7 @@ class Pret
     $this->setDate($date); // Initialisation de la date.
     $this->setFraisDeDossier($FraisDeDossier);//Initialisation des frais de dossier.
     $this->setTaux();//Initialisation de TAEG, ImpactFraisDeDossier, ImpactAssurance.
-    //$this->setTableauAmortissement();//Initialisation du tableau d'amortissement du prêt.
+    $this->setTableauAmortissement();//Initialisation du tableau d'amortissement du prêt.
   }
 
   // Mutateur chargé de modifier l'attribut $_K.
@@ -263,7 +263,6 @@ public function TableauAmortissement()
 
   public function setTableauAmortissement()
   {
-  $n=self::N;
   $K=$this->_K;
   $a=$this->_assurance;
   $m=$this->_mensualite;
@@ -278,8 +277,7 @@ public function TableauAmortissement()
 	$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
 	settype($interval, "integer");
 	}
-  $tableauAmortissement=array();
-    while ($n <= $durée) 
+    for ($n = self::N; $n <= $durée; $n++) 
   	{
   		if ($n<=$interval)
   					{
@@ -298,15 +296,12 @@ public function TableauAmortissement()
   					{
   						$echeance="autre";
   					}
-
   	$intêrets=$K*$taux1;
   	$intêrets=round($intêrets,2);
   	$Kremboursé=$m-$intêrets;
   	$K=$K-$Kremboursé;
   	$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
     $tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'couleur'=>$couleur, 'echeance' =>$echeance, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
-
-    $n=$n+1;
     }
   $this->_tableauAmortissement=$tableauAmortissement;
   }
@@ -402,5 +397,5 @@ echo $pret1->duree().'<br>';
 $test=is_int($pret1->duree());
 echo $test. '<br>';
 echo $pret1->date();
-/*print_r($pret1->TableauAmortissement());
-$pret1->GraphiquePretimmobilier();*/
+print_r($pret1->TableauAmortissement());
+/*$pret1->GraphiquePretimmobilier();*/
