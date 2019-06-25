@@ -277,7 +277,7 @@ public function TableauAmortissement()
 	$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
 	settype($interval, "integer");
 	}
-    for ($n = self::N; $n <= $durée; $n++) 
+  for ($n = self::N; $n <= $durée; $n++) 
   	{
   		if ($n<=$interval)
   					{
@@ -288,11 +288,11 @@ public function TableauAmortissement()
   					$couleur='red';
   					}
 
-  		if($n=($interval+1))
+  		if ($n=($interval+1))
   					{
   						$echeance="prochaine_échéance";
   					}
-  		else
+  	       	else
   					{
   						$echeance="autre";
   					}
