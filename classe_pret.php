@@ -264,6 +264,7 @@ public function TableauAmortissement()
   public function setTableauAmortissement()
   {
   $K=$this->_K;
+  $n=self::N;
   $a=$this->_assurance;
   $m=$this->_mensualite;
   $durée=$this->_duree;
@@ -277,8 +278,8 @@ public function TableauAmortissement()
 	$interval= (($interval->format('%y') * 12) + $interval->format('%m'));
 	settype($interval, "integer");
 	}
-  for ($n = self::N; $n <= $durée; $n++) 
-  	{
+  /*for ($n = self::N; $n <= $durée; $n++) 
+  	{*/
   		if ($n<=$interval)
   					{
   					$couleur='green';
@@ -290,7 +291,7 @@ public function TableauAmortissement()
 
   		if ($n=($interval+1))
   					{
-  						$echeance="prochaine_échéance";
+  						$echeance="prochaine échéance";
   					}
   	       	else
   					{
@@ -302,7 +303,7 @@ public function TableauAmortissement()
   	$K=$K-$Kremboursé;
   	$date=date('Y-m-d',strtotime('+1 month',strtotime($date)));
     $tableauAmortissement[$n]= array('interets' => $intêrets, 'Krembourse' => $Kremboursé, 'K' => $K, 'date_de_remboursement' => $date, 'couleur'=>$couleur, 'echeance' =>$echeance, 'assurance_du_pret'=> $a, 'montant_total_a_rembourser' => ($m+$a));
-    }
+    //}
   $this->_tableauAmortissement=$tableauAmortissement;
   }
 
@@ -396,6 +397,6 @@ echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le
 echo $pret1->duree().'<br>';
 $test=is_int($pret1->duree());
 echo $test. '<br>';
-echo $pret1->datePret();
+echo $pret1->datePret().'<br>';
 print_r($pret1->TableauAmortissement());
 $pret1->GraphiquePretimmobilier();
