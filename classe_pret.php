@@ -322,7 +322,7 @@ public function TableauAmortissement()
   $n=1;
   foreach($datay as $ligne)
         { 
-          $date_de_remboursementArray=$datay[$n]['date_de_remboursement'];
+          $date_de_remboursementArray[$n]=$datay[$n]['date_de_remboursement'];
           $assurance_du_pretArray[$n]=$datay[$n]['assurance_du_pret'];
           $interetsArray[$n]=$datay[$n]['interets'];
           $KrembourseArray[$n]=$datay[$n]['Krembourse'];
@@ -361,7 +361,7 @@ public function TableauAmortissement()
   $bplot->SetFillColor("orange");
   $bplot2 = new BarPlot($interetsArray);
   $bplot2->SetFillColor("red");
-  $bplot3 = new BarPlot($assuranceArray);
+  $bplot3 = new BarPlot($assurance_du_pretArray);
   $bplot3->SetFillColor("darkgreen");
   $accbplot = new AccBarPlot(array($bplot,$bplot2,$bplot3));
   $accbplot->value->Show();
