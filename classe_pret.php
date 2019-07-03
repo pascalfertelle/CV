@@ -322,10 +322,10 @@ public function TableauAmortissement()
   $n=1;
   foreach($datay as $ligne)
         { 
-          $date_de_remboursementArray[$n]=$datay[$n]['date_de_remboursement'];
-          $assurance_du_pretArray[$n]=$datay[$n]['assurance_du_pret'];
-          $interetsArray[$n]=$datay[$n]['interets'];
-          $KrembourseArray[$n]=$datay[$n]['Krembourse'];
+          $date_de_remboursementArray[$n-1]=$datay[$n]['date_de_remboursement'];
+          $assurance_du_pretArray[$n-1]=$datay[$n]['assurance_du_pret'];
+          $interetsArray[$n-1]=$datay[$n]['interets'];
+          $KrembourseArray[$n-1]=$datay[$n]['Krembourse'];
           $n=$n+1;
         }
   $datay = array($date_de_remboursementArray , $assurance_du_pretArray , $interetsArray , $KrembourseArray);
@@ -374,29 +374,29 @@ public function TableauAmortissement()
 
   // Basic table formatting
   $table->SetFont(FF_ARIAL,FS_NORMAL,10);
-  $table->SetAlign('right');
+  $table->SetAlign('center');
   $table->SetMinColWidth($cellwidth);
   $table->SetNumberFormat('%0.1f');
 
   // Format table header row
   $table->SetRowFillColor(0,'teal@0.7');
-  $table->SetRowFont(0,FF_ARIAL,FS_BOLD,11);
+  $table->SetRowFont(0,FF_ARIAL,FS_BOLD,6);
   $table->SetRowAlign(0,'center');
 
   // .. and add it to the graph
   $graph->Add($table);
-
   $graph->Stroke();
   }
 }
 
 $pret1= new Pret(100000,900,30,10,'12-06-10',500);
-echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
+/*echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
 echo 'les frais de dossier ont un impact de '.$pret1->ImpactFraisDeDossier().'% sur le TAEG<br>';
 echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le TAEG<br>';
 echo $pret1->duree().'<br>';
 $test=is_int($pret1->duree());
 echo $test. '<br>';
 echo $pret1->datePret().'<br>';
-print_r($pret1->TableauAmortissement());
-$pret1->GraphiquePretimmobilier();
+print_r($pret1->TableauAmortissement());*/
+$pret1->GraphiquePretImmobilier();
+?>
