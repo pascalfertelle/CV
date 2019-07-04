@@ -389,14 +389,14 @@ public function TableauAmortissement()
   }
 }
 
-$pret1= new Pret(100000,900,30,10,'12-06-10',500);
-/*echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
+/*$pret1= new Pret(100000,900,30,10,'12-06-10',500);
+echo 'le TAEG est de '.$pret1->TAEG().'%<br>';
 echo 'les frais de dossier ont un impact de '.$pret1->ImpactFraisDeDossier().'% sur le TAEG<br>';
 echo 'l\'assurance du prêt a un impact de '.$pret1->ImpactAssurance().'% sur le TAEG<br>';
 echo $pret1->duree().'<br>';
 $test=is_int($pret1->duree());
 echo $test. '<br>';
 echo $pret1->datePret().'<br>';
-print_r($pret1->TableauAmortissement());*/
-$pret1->GraphiquePretImmobilier();
+print_r($pret1->TableauAmortissement());
+$pret1->GraphiquePretImmobilier();*/
 ?>

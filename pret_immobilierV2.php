@@ -71,7 +71,8 @@
 					  if ($array[$n]['assurance_du_pret']!=0)
 					  {echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['assurance_du_pret'].'</td>';}
 					  echo '<td class= '.$array[$n]['echeance'].'>'.$array[$n]['montant_total_a_rembourser'].'</td>';
-					  if($array[$n]['echeance']="prochaine_échéance") {echo'<td class= '.$array[$n]['echeance'].'> prochaine échéance</td>';} echo '</tr>';
+					  if($array[$n]['echeance']=="prochaine_échéance")
+					   {echo'<td class= '.$array[$n]['echeance'].'> prochaine échéance</td>';} echo '</tr>';
 					  $n=$n+1;
 					  
 			}
