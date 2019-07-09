@@ -31,14 +31,15 @@ class PretManager
   	$data=$pret->TableauAmortissement();
     $params=substr(str_repeat("?,", count($data[1])), 0, -1);
     $params=substr(str_repeat("(".$params."),", count($data)), 0, -1);
+    echo $params;
     $a=array();
     foreach ($data AS $param)
     {
     $a=array_merge($a, array_values($param));
     }
-
+    print_r($a);
     $state = $this->_db->prepare("INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, couleur, échéance_du_prêt, 
-    assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params);
+    assurance_du_prêt, montant_total_à_rembourser) VALUES ".$params );
        
     $state->execute($a);
     return $this->_db->lastInsertId();
@@ -51,9 +52,9 @@ class PretManager
   }
 }
 
-/*require 'classe_pret.php';
+require 'classe_pret.php';
 $pret1= new Pret(100000,900,30,10,'12-06-10',500);
 $db = new PDO('mysql:host=localhost;dbname=id6713792_cv;charset=utf8', 'id6713792_pascal', 'Radio124f');
 $pretManager1=new PretManager($db);
-$pretManager1->addTableauAmortissement($pret1);*/
+$pretManager1->addTableauAmortissement($pret1);
 
