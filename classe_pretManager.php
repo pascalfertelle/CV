@@ -33,9 +33,11 @@ class PretManager
     $params=substr(str_repeat("(".$params."),", count($data)), 0, -1);
     echo $params;
     $a=array();
+    $n=0;
     foreach ($data AS $param)
     {
-    $a=array_merge($a, array_values($param));
+    $a[$n]=array_values($param);
+    $n=$n+1;
     }
     print_r($a);
     $state = $this->_db->prepare("INSERT INTO pret_immobilier (intérêts, Kremboursé, K, date_de_remboursement, couleur, échéance_du_prêt, 
